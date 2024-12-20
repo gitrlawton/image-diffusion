@@ -10,11 +10,14 @@ import CommentSection from "@/components/custom/CommentSection.jsx";
 // The user's feed
 export default function Feed() {
   return (
-    <div className="container mx-auto pb-16 pt-4">
+    <div className="max-w-lg mx-auto pb-16 pt-4 px-4 sm:px-6 lg:px-8">
       {posts.map(post => {
         const user = getUserById(post.userId);
         return (
-          <div key={post.id} className="mb-8 bg-white rounded-lg shadow">
+          <div
+            key={post.id}
+            className="mb-8 bg-white rounded-lg shadow-md overflow-hidden"
+          >
             <div className="p-4 flex items-center">
               <Link
                 href={`/profile/${post.userId}`}
