@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { usePosts } from "@/app/contexts/PostContext";
 
 export default function AddPhotoModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,6 +21,7 @@ export default function AddPhotoModal() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedImageUrl, setGeneratedImageUrl] = useState(null);
   const [currentView, setCurrentView] = useState("generate");
+  const { addPost } = usePosts();
 
   const handleGenerate = async e => {
     e.preventDefault();
@@ -61,20 +63,29 @@ export default function AddPhotoModal() {
     setIsGenerating(false);
   };
 
-  // Not implemented
   const handlePublish = () => {
-    // TODO: Handle posting the generated image with the caption
-    console.log(
-      "Publishing image:",
-      generatedImageUrl,
-      "with caption:",
-      caption
-    );
-    setIsOpen(false);
-    setPrompt("");
-    setCaption("");
-    setGeneratedImageUrl(null);
-    setCurrentView("generate");
+    if (generatedImageUrl) {
+      const newPost = {
+        id: Date.now().toString(),
+        userId: "1", // TODO: Replace with the actual user ID.  Using mock user ID '1' for now
+        imageUrl: generatedImageUrl,
+        likes: 0,
+        comments: [],
+        caption: caption,
+      };
+      addPost(newPost);
+      console.log(
+        "Publishing image:",
+        generatedImageUrl,
+        "with caption:",
+        caption
+      );
+      setIsOpen(false);
+      setPrompt("");
+      setCaption("");
+      setGeneratedImageUrl(null);
+      setCurrentView("generate");
+    }
   };
 
   return (

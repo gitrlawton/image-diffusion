@@ -2,16 +2,17 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { getUserById, getUserPosts } from "@/lib/data";
+import { getUserById } from "@/lib/data";
 import FollowButton from "@/components/custom/FollowButton";
 import FollowModal from "@/components/custom/FollowModal";
+import { usePosts } from "@/app/contexts/PostContext";
 
-// TODO: Replace with the actual user ID
+// TODO: Replace with the actual user ID.  Using mock user ID '1' for now.
 const PROFILE_USER_ID = "1";
 
 export default function Profile() {
   const user = getUserById(PROFILE_USER_ID);
-  const userPhotos = getUserPosts(PROFILE_USER_ID);
+  const { posts } = usePosts();
 
   if (!user) return <div>User not found</div>;
 
@@ -29,7 +30,7 @@ export default function Profile() {
           <h1 className="text-3xl font-bold text-gray-800">{user.username}</h1>
           <p className="text-gray-600 mt-1">{user.name}</p>
           <div className="flex flex-wrap justify-center sm:justify-start gap-4 mt-4">
-            <span className="font-semibold">{userPhotos.length} posts</span>
+            <span className="font-semibold">{posts.length} posts</span>
             <FollowModal userIds={user.followers} title="followers" />
             <FollowModal userIds={user.following} title="following" />
           </div>
@@ -37,7 +38,7 @@ export default function Profile() {
         </div>
       </div>
       <div className="grid grid-cols-3 gap-1 sm:gap-4">
-        {userPhotos.map(photo => (
+        {posts.map(photo => (
           <Link
             key={photo.id}
             href={`/photo/${photo.id}`}
