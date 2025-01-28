@@ -1,45 +1,78 @@
-# Pentagram: Instagram, but with AI Images
+# Stablegram (Instagram Clone)
 
-## Getting Started
+## Overview
 
-First, clone the GitHub repository:
+This project is a web application that mimics the functionality of Instagram, allowing users to create accounts, upload photos, like and comment on posts, and follow other users. Built with Next.js and Python, the application uses React for the front-end and leverages a Stable Diffusion model hosted on Modal's serverless GPU infrastructure for AI image generation.
 
-```bash
-git clone https://github.com/team-headstart/pentagram.git
-```
+## Features
 
-Then, navigate to the project directory:
+- **User Authentication**: Users can create accounts and log in to access their profiles.
+- **AI Image Generation**: Users can post AI generated images with captions and share them with their followers.
+- **Social Interactions**: Users can like posts, leave comments, and follow other users to engage with the community and curate their feed.
+- **Search Functionality**: Users can search for other users and hashtags to discover new content.
 
-```bash
-cd pentagram
-```
+## Installation
 
-Then, install the dependencies:
+To set up the project, ensure you have Node.js installed on your machine. Then, follow these steps:
 
-```bash
-npm install
-```
+1. Clone the repository:
 
-Run the development server:
+   ```bash
+   git clone <repository-url>
+   cd <repository-directory>
+   ```
 
-```bash
-npm run dev
-```
+2. Install the required packages:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+   ```bash
+   npm install
+   ```
 
-## Tasks
+3. Create a `.env` file in the root directory and add your environment variables:
 
-- Take a look at the TODOs in the repo, namely:
+   ```plaintext
+   MODAL_URL='your_modal_url'
+   ```
 
-    - `src/app/page.tsx`: This is where the user can input their prompt and generate an image. Make sure to update the UI and handle the API response to display the images generated
+4. Start the development server:
 
-    - `src/app/api/generate-image/route.ts`: This is where the image generation API is implemented. Make sure to call your image generation API from Modal here
+   ```bash
+   npm run dev
+   ```
 
+5. Open your browser and navigate to `http://localhost:3000` to view the application.
 
-## Learn More
+## Usage
 
-To learn more about Next.js, take a look at the following resources:
+1. Create an account or log in to your existing account.
+2. Generate photos to share with your followers.
+3. Like and comment on posts from other users.
+4. Follow users to see their posts in your feed.
+5. Use the search feature to find users or hashtags.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## File Descriptions
+
+- **src/app/api/generate-image/route.js**: API route for generating images based on user prompts.
+- **src/app/contexts/PostContext.jsx**: Context provider for managing posts across the application.
+- **src/app/photo/[id]/page.jsx**: Page component for displaying individual photo posts.
+- **src/app/profile/page.jsx**: Page component for displaying user profiles and their posts.
+- **src/app/profile/[id]/page.jsx**: Page component for displaying a specific user's profile and their posts.
+- **src/app/search/page.jsx**: Page component for searching users and hashtags.
+- **src/app/layout.jsx**: Main layout component that wraps the application.
+- **src/components/custom/AddPhotoModal.jsx**: Modal component for adding new photos.
+- **src/components/custom/CommentSection.jsx**: Component for displaying and adding comments to posts.
+- **src/components/custom/FollowModal.jsx**: Modal component for displaying followers and following users.
+- **src/components/custom/FollowButton.jsx**: Button component for following/unfollowing users.
+- **src/components/custom/LikeButton.jsx**: Button component for liking posts.
+- **src/components/custom/Navbar.jsx**: Navigation bar component for easy access to different parts of the application.
+
+## Dependencies
+
+- **Next.js**: Framework for building server-rendered React applications.
+- **React**: JavaScript library for building user interfaces.
+- **Lucide React**: Icon library for React applications.
+- **Tailwind CSS**: Utility-first CSS framework for styling the application.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a pull request or open an issue for any suggestions or improvements.
